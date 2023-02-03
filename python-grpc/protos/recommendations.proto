@@ -1,0 +1,26 @@
+syntax = "proto3";
+// 书籍分类
+enum BookCategory {
+    MYSTERY = 0;
+    SCIENCE_FICTION = 1;
+    SELF_HELP = 2;
+}
+// 定义命令请求
+message RecommendationRequest {
+    int32 user_id = 1;
+    BookCategory category = 2;
+    int32 max_results = 3;
+}
+// 定义书籍请求
+message BookRecommendation {
+    int32 id = 1;
+    string title = 2;
+}
+// 定义响应消息
+message RecommendationResponse {
+    repeated BookRecommendation recommendations = 1;
+}
+// 定义rpc服务
+service Recommendations {
+    rpc Recommend (RecommendationRequest) returns (RecommendationResponse);
+}
